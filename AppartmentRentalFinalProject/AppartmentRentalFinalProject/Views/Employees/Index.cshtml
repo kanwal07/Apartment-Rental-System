@@ -1,0 +1,103 @@
+﻿@model IEnumerable<AppartmentRentalFinalProject.Models.Employee>
+
+<h3>List of Employees</h3>
+
+<p>
+    @Html.ActionLink("Add New", "Create")
+</p>
+
+@using (Html.BeginForm("Index", "Employees", FormMethod.Get))
+{
+    <b>Search By:</b>
+    <br />
+    <p>
+        @Html.RadioButton("searchBy", "FirstName")<text>&nbsp;First Name</text>&nbsp;&nbsp;&nbsp;&nbsp;
+        @Html.RadioButton("searchBy", "LastName")<text>&nbsp;Last Name</text>&nbsp;&nbsp;&nbsp;&nbsp;
+        @Html.RadioButton("searchBy", "EmpType")<text>&nbsp;Employee Type</text>&nbsp;&nbsp;&nbsp;&nbsp;
+        @Html.RadioButton("searchBy", "Email")<text>&nbsp;Email</text>
+        <hr />
+        @Html.TextBox("search") <input type="submit" value="Search" />
+    </p>
+}
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmpType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BirthDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Password)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.FirstName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.LastName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.EmpType)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.BirthDate)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Gender)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Address)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.PhoneNumber)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Email)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Password)
+    </td>
+
+    <td>
+        @Html.ActionLink("Details", "Details", new { id = item.EmployeeId }) 
+    </td>
+
+
+    @*
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.EmployeeId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.EmployeeId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.EmployeeId })
+        </td>
+
+    *@
+</tr>
+    }
+
+</table>

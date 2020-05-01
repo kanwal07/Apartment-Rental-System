@@ -1,0 +1,80 @@
+﻿@model IEnumerable<AppartmentRentalFinalProject.Models.Apartment>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<p>
+    @using (Html.BeginForm("Index", "Apartments", FormMethod.Get))
+    {
+        <b>Search By:</b><br />
+
+        @Html.RadioButton("searchBy", "Description")<text>Description</text><br/>
+        @Html.RadioButton("searchBy", "Status")<text>Status</text><br />
+        @Html.RadioButton("searchBy", "RentalPrice")<text>Rental Price</text><br/>        
+        @Html.TextBox("search") <input type="submit" value="Search" />
+    }
+
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Number)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RentalPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Building.StreetName)
+        </th>
+        <th></th>
+    </tr>
+    @if (Model.Count() == 0)
+    {
+        <tr>
+            <td colspan="4">No rows match searched criteria</td>
+        </tr>
+    }
+    else
+    {
+
+        foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Number)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RentalPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Building.StreetName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ApartmentId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ApartmentId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ApartmentId })
+            </td>
+        </tr>
+        }
+    }
+</table>

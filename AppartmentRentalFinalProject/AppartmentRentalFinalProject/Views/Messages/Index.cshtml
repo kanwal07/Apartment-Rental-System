@@ -1,0 +1,80 @@
+﻿@model IEnumerable<AppartmentRentalFinalProject.Models.Message>
+
+
+<h2>Messages</h2>
+
+<p>
+    @Html.ActionLink("Add New", "Create")
+</p>
+
+    @using (Html.BeginForm("Index", "Messages", FormMethod.Get))
+    {
+        <b>Search By:</b><br />
+                         <p>
+
+                             @Html.RadioButton("searchBy", "Description")<text>&nbsp;Description</text>&nbsp;&nbsp;&nbsp;&nbsp;
+                             @Html.RadioButton("searchBy", "Status")<text>&nbsp;Status</text>
+                             <hr />
+                             @Html.TextBox("search") <input type="submit" value="Search" />
+
+                         </p>
+    }
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tenant.FirstName)
+        </th>
+        <th></th>
+    </tr>
+
+    @if (Model.Count() == 0)
+    {
+        <tr>
+            <td colspan="4">No rows match searched criteria</td>
+        </tr>
+    }
+    else
+    {
+
+
+
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Employee.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tenant.FirstName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.MessageId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.MessageId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.MessageId })
+                </td>
+            </tr>
+        }
+    }
+</table>

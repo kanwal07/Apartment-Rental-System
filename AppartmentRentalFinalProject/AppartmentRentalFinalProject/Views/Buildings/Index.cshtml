@@ -1,0 +1,79 @@
+﻿@model IEnumerable<AppartmentRentalFinalProject.Models.Building>
+
+<h3>List of Buildings</h3>
+
+<p>
+    @Html.ActionLink("Add New", "Create")
+</p>
+
+
+    @using (Html.BeginForm("Index", "Buildings", FormMethod.Get))
+    {
+        <b>Search By:</b><br />
+    <p>
+        @Html.RadioButton("searchBy", "City")<text>&nbsp;City</text>&nbsp;&nbsp;&nbsp;&nbsp;
+        @Html.RadioButton("searchBy", "Province")<text>&nbsp;Province</text>&nbsp;&nbsp;&nbsp;&nbsp;
+        @Html.RadioButton("searchBy", "PostalCode")<text>&nbsp;Postal Code</text>&nbsp;&nbsp;&nbsp;&nbsp;
+        @Html.RadioButton("searchBy", "EmployeeFirstName")<text>&nbsp;First Name</text>
+    <hr />
+        @Html.TextBox("search")&nbsp;&nbsp;<input type="submit" value="Search" />
+    </p> <br />
+    }
+
+
+
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Number)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StreetName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PostalCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Province)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee.FirstName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Number)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StreetName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PostalCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.City)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Province)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee.FirstName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.BuildingId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.BuildingId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.BuildingId })
+        </td>
+    </tr>
+}
+
+</table>

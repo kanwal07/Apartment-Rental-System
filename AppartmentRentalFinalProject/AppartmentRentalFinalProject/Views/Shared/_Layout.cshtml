@@ -1,0 +1,63 @@
+﻿    <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Management</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+
+<!---Separacao-->
+<body>
+    <div class="navbar navbar-fixed-top" style="background-color:navy;">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" >
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @*@Html.ActionLink("Teste", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+
+
+
+                    <li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+
+                        //<li><a href="">Dear @User.Identity.Name</a></li>
+                        <li>@Html.ActionLink("Buildings", "Index", "Buildings")</li>
+                        //<li>@Html.ActionLink("Appartments", "Index", "Apartments")</li>
+                        <li>@Html.ActionLink("Employees", "Index", "Employees")</li>
+                        <li>@Html.ActionLink("Tenants", "Index", "Tenants")</li>
+                        <li>@Html.ActionLink("Appointments", "Index", "Appointments")</li>
+                        <li>@Html.ActionLink("Messages", "Index", "Messages")</li>
+                        ///<li>@Html.ActionLink("User List", "getUserList", "Home")</li>
+
+
+                    }
+                        </li>
+                    </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

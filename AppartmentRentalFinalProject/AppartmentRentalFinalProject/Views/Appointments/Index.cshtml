@@ -1,0 +1,72 @@
+﻿@model IEnumerable<AppartmentRentalFinalProject.Models.Appointment>
+
+<h2>Appointments</h2>
+
+<p>
+    @Html.ActionLink("Add New", "Create")
+</p>
+
+
+    @using (Html.BeginForm("Index", "Appointments", FormMethod.Get))
+    {
+        <b>Search By:</b><br />
+        <p>
+        @Html.RadioButton("searchBy", "EmployeeFirstName")<text>(Owner/Manager) FirstName</text>&nbsp; &nbsp; &nbsp; &nbsp;
+        @Html.RadioButton("searchBy", "TenantFirstName")<text>Tenant's FirstName</text>
+        <hr />
+        @Html.TextBox("search") <input type="submit" value="Search" />
+        </p>
+    }
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AppointmentDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AppointmentTime)
+        </th>
+        <th>
+            (Owner/Manager)
+            @Html.DisplayNameFor(model => model.Employee.FirstName)
+        </th>
+        <th>
+            Tenant's
+            @Html.DisplayNameFor(model => model.Tenant.FirstName)
+        </th>
+        <th></th>
+    </tr>
+
+    @if (Model.Count() == 0)
+    {
+        <tr>
+            <td colspan="4">No rows match searched criteria</td>
+        </tr>
+    }
+    else
+    {
+
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AppointmentDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AppointmentTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Employee.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tenant.FirstName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.AppointmentId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.AppointmentId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.AppointmentId })
+                </td>
+            </tr>
+        }
+    }
+    </table>
